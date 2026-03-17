@@ -1,10 +1,39 @@
 import { Skill } from "../Skill";
 import { Title } from "../Title";
 import { Button } from "../ui/button";
-import { Field, FieldDescription, FieldLabel } from "../ui/field";
+import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 
+import { useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
+
+type Status = null | 'sending' | 'success' | 'error'
+
 export function ContactMe() {
+
+    const formRef = useRef<HTMLFormElement>(null)
+    const [status, setStatus] = useState<Status>(null)
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (!formRef.current) return
+        setStatus('sending')
+
+        try {
+            await emailjs.sendForm(
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                formRef.current,
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+            )
+            setStatus('success')
+        } catch (err) {
+            console.error(err)
+            setStatus('error')
+        }
+    }
+
+
     return (
         <section className="flex flex-col item-center relative">
             <Title size="small">Contact Me</Title>
@@ -18,18 +47,23 @@ export function ContactMe() {
                         <Skill name="LinkedIn" image="/linkedin.svg" description="https://www.linkedin.com/in/diogoacorigo/" />
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                        <Field>
-                            <FieldLabel htmlFor="textarea-message">Or send me a message:</FieldLabel>
-                            <Textarea id="textarea-message" placeholder="Type your message here." className="min-h-24"/>
-                            <FieldDescription></FieldDescription>
-                        </Field>
+                    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-2">
+                        <p>Or send me a message:</p>
+
+                        <Input type="text" name="name" placeholder="Your name" required />
+                        <Input type="email" name="email" placeholder="Your email" required />
+                        <Textarea name="message" placeholder="Your message" className="min-h-24" required />
 
                         <div className="flex gap-2 items-center">
-                            <Button>Send</Button>
+                            <Button type="submit" disabled={status === 'sending'}>
+                                {status === 'sending' ? 'Sending...' : 'Send'}
+                            </Button>
                             <p className="text-muted-foreground text-sm">I try to respond within 24 hours.</p>
                         </div>
-                    </div>
+                        
+                        {status === 'success' && <p>Message sent!</p>}
+                        {status === 'error' && <p>Something went wrong. Try again.</p>}
+                    </form>
                 </div>
             </div>
         </section>
