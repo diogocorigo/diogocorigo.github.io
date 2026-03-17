@@ -58,11 +58,12 @@ export function ContactMe() {
                             <Button type="submit" disabled={status === 'sending'}>
                                 {status === 'sending' ? 'Sending...' : 'Send'}
                             </Button>
-                            <p className="text-muted-foreground text-sm">I try to respond within 24 hours.</p>
                         </div>
-                        
-                        {status === 'success' && <p>Message sent!</p>}
-                        {status === 'error' && <p>Something went wrong. Try again.</p>}
+
+                        <p className="text-muted-foreground text-sm">
+                            {status === 'success' && "Thank you for your message! I'll respond within 24 hours."}
+                            {status === 'error' && "Something went wrong. Try again."}
+                        </p>
                     </form>
                 </div>
             </div>
