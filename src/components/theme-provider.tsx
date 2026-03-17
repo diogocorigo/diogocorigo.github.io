@@ -153,23 +153,23 @@ export function ThemeProvider({
         return
       }
 
-      if (event.key.toLowerCase() !== "d") {
-        return
-      }
+    //   if (event.key.toLowerCase() !== "d") {
+    //     return
+    //   }
 
-      setThemeState((currentTheme) => {
-        const nextTheme =
-          currentTheme === "dark"
-            ? "light"
-            : currentTheme === "light"
-              ? "dark"
-              : getSystemTheme() === "dark"
-                ? "light"
-                : "dark"
+    //   setThemeState((currentTheme) => {
+    //     const nextTheme =
+    //       currentTheme === "dark"
+    //         ? "light"
+    //         : currentTheme === "light"
+    //           ? "dark"
+    //           : getSystemTheme() === "dark"
+    //             ? "light"
+    //             : "dark"
 
-        localStorage.setItem(storageKey, nextTheme)
-        return nextTheme
-      })
+    //     localStorage.setItem(storageKey, nextTheme)
+    //     return nextTheme
+    //   })
     }
 
     window.addEventListener("keydown", handleKeyDown)
