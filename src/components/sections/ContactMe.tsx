@@ -35,7 +35,7 @@ export function ContactMe() {
 
 
     return (
-        <section className="flex flex-col item-center relative">
+        <section className="flex flex-col item-center relative" id="contact-me">
             <Title size="small">Contact Me</Title>
 
             <div className="flex flex-col gap-2 md:text-lg text-zinc-900 dark:text-zinc-100 font-sans p-2 md:p-4 border-l border-b border-dashed border-muted-foreground leading-relaxed tracking-wider">
@@ -61,7 +61,7 @@ export function ContactMe() {
                     <div className="flex flex-col gap-2 border-dashed border-muted-foreground border-t pt-2 lg:border-t-0 lg:pt-0 lg:border-l lg:pl-2 ">
                         <Skill name="Email" image="/email.svg" description="diogoacorigo@gmail.com" />
                         <Skill name="Phone" image="/phone.svg" description="+351 935 302 719" />
-                        {/* <Skill name="LinkedIn" image="/linkedin.png" description="https://www.linkedin.com/in/diogoacorigo/" /> */}
+                        <Skill name="Curriculum" image="/curriculum.svg" description="Download my curriculum" clickable download link="/CV Diogo Corigo.pdf" />
                     </div>
                 </div>
             </div>
