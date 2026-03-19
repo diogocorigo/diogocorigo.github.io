@@ -1,7 +1,7 @@
 export function Title({ size, classes, children, flipped }: { size?: string; classes?: string; children: string; flipped?: boolean }) {
     const [first, second] = children.split(' ');
 
-    let sizeClass = 'text-[6rem] md:text-[8rem] lg:text-[10rem]';
+    let sizeClass = 'text-[3rem] sm:text-[6rem] lg:text-[10rem]';
 
     switch (size) {
         case 'small':
